@@ -2,6 +2,11 @@ package PACKAGE_NAME;
 
 public class SnowDayCalc {
     public static void main(String[] args) {
+
+        if (args.length != 5) {
+        System.out.println("Please enter the temperature, day of the week, what type of school you go to and whether your school has any events scheduled. ");
+        return;
+    }
         int Temp = Integer.valueOf(args[0]);
         double chanceOfSnowstorm = Double.valueOf(args[1]);
         char DOTW = args[2].charAt(0);
@@ -9,24 +14,31 @@ public class SnowDayCalc {
         boolean scheduledEvents = Boolean.valueOf(args[4]);
         double chanceOfsnowDay = 0;
 
+
+
         if (Temp < -50 || Temp > 100) {
             System.out.println("Your Temperature must be between -50 and 100 degrees fahrenheit.");
+            return;
         }
 
         if (chanceOfSnowstorm < 0 || chanceOfSnowstorm > 100) {
             System.out.println("The chance of a snow storm must be between 0 and 100.");
+            return;
         }
 
-        if (DOTW != 'm' || DOTW != 'M' || DOTW != 't' || DOTW != 'T' || DOTW != 'w' || DOTW != 'W' || DOTW != 'r' || DOTW != 'R' || DOTW != 'f' || DOTW != 'F') {
+        if (DOTW != 'm' && DOTW != 'M' && DOTW != 't' && DOTW != 'T' && DOTW != 'w' && DOTW != 'W' && DOTW != 'r' && DOTW != 'R' && DOTW != 'f' && DOTW != 'F') {
             System.out.println("You must enter a valid Day of the week (M, T, W, R, F)");
+            return;
         }
 
-        if !(DOTW = 'p' || DOTW = 'P' || DOTW = 'u' || DOTW = 'U' || DOTW = 'r' || DOTW = 'R' || DOTW = 'v' || DOTW = 'V' || DOTW = 'b' || DOTW = 'B') {
-            System.out.println("You must enter a valid Day of the week (P, U, R, V, B)");
+        if (typeOfschool != 'p' && typeOfschool != 'P' && typeOfschool != 'u' && typeOfschool != 'U' && typeOfschool != 'r' && typeOfschool != 'R' && typeOfschool != 'v' && typeOfschool != 'V' && typeOfschool != 'b' && typeOfschool != 'B') {
+            System.out.println("You must enter a valid type of school (P, U, R, V, B)");
+            return;
         }
 
-        if (scheduledEvents !== false || scheduledEvents !== true) {
-            System.out.println("");
+        if (scheduledEvents != false && scheduledEvents != true) {
+            System.out.println("You must enter true or false.");
+            return;
         }
 
         if (Temp <= 32) {
@@ -37,7 +49,7 @@ public class SnowDayCalc {
             chanceOfsnowDay += 10;
         } else if (Temp >= 50 && Temp <= 60) {
             chanceOfsnowDay += 5;
-        } else if (Temp >= 50) {
+        } else if (Temp >= 60) {
             chanceOfsnowDay -= 10;
         }
 
@@ -78,6 +90,12 @@ public class SnowDayCalc {
             chanceOfsnowDay += 10;
         }
 
-        System.out.println("Your chance of having a snow day is " + chanceOfsnowDay + "%.");
+        if (scheduledEvents == false) {
+            chanceOfsnowDay -= 5;
+        } else if (scheduledEvents == true) {
+            chanceOfsnowDay += 5;
+        }
+
+        System.out.println("Your chance of having a snow day is " + chanceOfsnowDay * (4.0/3.0) + "%.");
     }
 }
